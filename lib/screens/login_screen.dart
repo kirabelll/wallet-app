@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                       height: 100,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [Colors.blue.shade600, Colors.blue.shade800],
+                          colors: [Colors.orange.shade600, Colors.orange.shade800],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
@@ -159,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue.shade600,
+                        backgroundColor: Colors.orange.shade600,
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -178,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                     onPressed: () {},
                     child: Text(
                       'Forgot Password?',
-                      style: TextStyle(color: Colors.blue.shade600),
+                      style: TextStyle(color: Colors.orange.shade600),
                     ),
                   ),
                 ],

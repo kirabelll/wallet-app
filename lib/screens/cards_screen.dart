@@ -40,7 +40,7 @@ class _CardsScreenState extends State<CardsScreen> with SingleTickerProviderStat
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
       appBar: AppBar(
-        backgroundColor: Colors.blue.shade600,
+        backgroundColor: Colors.orange.shade600,
         foregroundColor: Colors.white,
         title: const Text('My Cards'),
         automaticallyImplyLeading: false,
@@ -65,7 +65,7 @@ class _CardsScreenState extends State<CardsScreen> with SingleTickerProviderStat
                   cardHolder: 'Kirubel Kassahun',
                   expiryDate: '12/25',
                   cardType: 'VISA',
-                  gradient: [Colors.blue.shade600, Colors.blue.shade800],
+                  gradient: [Colors.blue.shade600, Colors.black],
                 ),
               ),
               const SizedBox(height: 16),
@@ -76,7 +76,7 @@ class _CardsScreenState extends State<CardsScreen> with SingleTickerProviderStat
                   cardHolder: 'Kirubel Kassahun',
                   expiryDate: '08/26',
                   cardType: 'MASTERCARD',
-                  gradient: [Colors.purple.shade600, Colors.purple.shade800],
+                  gradient: [Colors.purple.shade600, Colors.orange.shade800],
                 ),
               ),
               const SizedBox(height: 24),

@@ -33,7 +33,7 @@ class _MainScreenState extends State<MainScreen> {
             _currentIndex = index;
           });
         },
-        selectedItemColor: Colors.blue.shade600,
+        selectedItemColor: Colors.orange.shade600,
         unselectedItemColor: Colors.grey,
         items: const [
           BottomNavigationBarItem(

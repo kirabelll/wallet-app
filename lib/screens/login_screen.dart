@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'main_screen.dart';
+import '../services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -12,10 +13,52 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _isPasswordVisible = false;
+  bool _isLoading = false;
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
 
+  Future<void> _handleLogin() async {
+    if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
+      _showError('Please fill in all fields');
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final result = await AuthService.login(
+        _emailController.text.trim(),
+        _passwordController.text,
+      );
+
+      if (result['success']) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const MainScreen()),
+        );
+      } else {
+        _showError(result['message']);
+      }
+    } catch (e) {
+      _showError('Login failed. Please try again.');
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  void _showError(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.red,
+      ),
+    );
+  }
   @override
   void initState() {
     super.initState();
@@ -152,23 +195,27 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                     width: double.infinity,
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => const MainScreen()),
-                        );
-                      },
+                      onPressed: _isLoading ? null : _handleLogin,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.orange.shade600,
+                        backgroundColor: Colors.blue.shade600,
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      child: const Text(
-                        'Sign In',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                      ),
+                      child: _isLoading
+                          ? const SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2,
+                              ),
+                            )
+                          : const Text(
+                              'Sign In',
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                            ),
                     ),
                   ),
                   const SizedBox(height: 16),
